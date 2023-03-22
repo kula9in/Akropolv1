@@ -1,0 +1,453 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище AkropolKaluginModel" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Aircondit">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="aircondit" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Bathroom">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="quantity" Type="nvarchar" MaxLength="50" />
+          <Property Name="vid" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Fond">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="floor" Type="nvarchar" MaxLength="50" />
+          <Property Name="year_build" Type="date" />
+          <Property Name="quntyti_rooms" Type="nvarchar" MaxLength="50" />
+          <Property Name="price_cadastr" Type="nvarchar" MaxLength="50" />
+          <Property Name="price_arend" Type="nvarchar" MaxLength="50" />
+          <Property Name="price_market" Type="nvarchar" MaxLength="50" />
+          <Property Name="id_RoomArend" Type="int" />
+          <Property Name="id_Bathroom" Type="int" />
+          <Property Name="id_Location" Type="int" />
+          <Property Name="id_aircondit" Type="int" />
+        </EntityType>
+        <EntityType Name="Location">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="location" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Manager">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Login" Type="nvarchar" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" />
+          <Property Name="Id_role" Type="int" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RoomArend">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Arend" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK_Fond_Aircondit">
+          <End Role="Aircondit" Type="Self.Aircondit" Multiplicity="0..1" />
+          <End Role="Fond" Type="Self.Fond" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Aircondit">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Fond">
+              <PropertyRef Name="id_aircondit" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Fond_Bathroom">
+          <End Role="Bathroom" Type="Self.Bathroom" Multiplicity="0..1" />
+          <End Role="Fond" Type="Self.Fond" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bathroom">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Fond">
+              <PropertyRef Name="id_Bathroom" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Fond_Location">
+          <End Role="Location" Type="Self.Location" Multiplicity="0..1" />
+          <End Role="Fond" Type="Self.Fond" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Fond">
+              <PropertyRef Name="id_Location" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Fond_RoomArend">
+          <End Role="RoomArend" Type="Self.RoomArend" Multiplicity="0..1" />
+          <End Role="Fond" Type="Self.Fond" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RoomArend">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Fond">
+              <PropertyRef Name="id_RoomArend" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Manager_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
+          <End Role="Manager" Type="Self.Manager" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Manager">
+              <PropertyRef Name="Id_role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище AkropolKaluginModelContainer">
+          <EntitySet Name="Aircondit" EntityType="Self.Aircondit" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Bathroom" EntityType="Self.Bathroom" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Fond" EntityType="Self.Fond" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Location" EntityType="Self.Location" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Manager" EntityType="Self.Manager" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RoomArend" EntityType="Self.RoomArend" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Fond_Aircondit" Association="Self.FK_Fond_Aircondit">
+            <End Role="Aircondit" EntitySet="Aircondit" />
+            <End Role="Fond" EntitySet="Fond" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Fond_Bathroom" Association="Self.FK_Fond_Bathroom">
+            <End Role="Bathroom" EntitySet="Bathroom" />
+            <End Role="Fond" EntitySet="Fond" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Fond_Location" Association="Self.FK_Fond_Location">
+            <End Role="Location" EntitySet="Location" />
+            <End Role="Fond" EntitySet="Fond" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Fond_RoomArend" Association="Self.FK_Fond_RoomArend">
+            <End Role="RoomArend" EntitySet="RoomArend" />
+            <End Role="Fond" EntitySet="Fond" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Manager_Role" Association="Self.FK_Manager_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="Manager" EntitySet="Manager" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="AkropolKaluginModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Aircondit">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="aircondit1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Fond" Relationship="Self.FK_Fond_Aircondit" FromRole="Aircondit" ToRole="Fond" />
+        </EntityType>
+        <EntityType Name="Bathroom">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="quantity" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="vid" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Fond" Relationship="Self.FK_Fond_Bathroom" FromRole="Bathroom" ToRole="Fond" />
+        </EntityType>
+        <EntityType Name="Fond">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="floor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="year_build" Type="DateTime" Precision="0" />
+          <Property Name="quntyti_rooms" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="price_cadastr" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="price_arend" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="price_market" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="id_RoomArend" Type="Int32" />
+          <Property Name="id_Bathroom" Type="Int32" />
+          <Property Name="id_Location" Type="Int32" />
+          <Property Name="id_aircondit" Type="Int32" />
+          <NavigationProperty Name="Aircondit" Relationship="Self.FK_Fond_Aircondit" FromRole="Fond" ToRole="Aircondit" />
+          <NavigationProperty Name="Bathroom" Relationship="Self.FK_Fond_Bathroom" FromRole="Fond" ToRole="Bathroom" />
+          <NavigationProperty Name="Location" Relationship="Self.FK_Fond_Location" FromRole="Fond" ToRole="Location" />
+          <NavigationProperty Name="RoomArend" Relationship="Self.FK_Fond_RoomArend" FromRole="Fond" ToRole="RoomArend" />
+        </EntityType>
+        <EntityType Name="Location">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="location1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Fond" Relationship="Self.FK_Fond_Location" FromRole="Location" ToRole="Fond" />
+        </EntityType>
+        <EntityType Name="Manager">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Id_role" Type="Int32" />
+          <NavigationProperty Name="Role" Relationship="Self.FK_Manager_Role" FromRole="Manager" ToRole="Role" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Manager" Relationship="Self.FK_Manager_Role" FromRole="Role" ToRole="Manager" />
+        </EntityType>
+        <EntityType Name="RoomArend">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Arend" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Fond" Relationship="Self.FK_Fond_RoomArend" FromRole="RoomArend" ToRole="Fond" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_Fond_Aircondit">
+          <End Role="Aircondit" Type="Self.Aircondit" Multiplicity="0..1" />
+          <End Role="Fond" Type="Self.Fond" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Aircondit">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Fond">
+              <PropertyRef Name="id_aircondit" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Fond_Bathroom">
+          <End Role="Bathroom" Type="Self.Bathroom" Multiplicity="0..1" />
+          <End Role="Fond" Type="Self.Fond" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bathroom">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Fond">
+              <PropertyRef Name="id_Bathroom" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Fond_Location">
+          <End Role="Location" Type="Self.Location" Multiplicity="0..1" />
+          <End Role="Fond" Type="Self.Fond" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Fond">
+              <PropertyRef Name="id_Location" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Fond_RoomArend">
+          <End Role="RoomArend" Type="Self.RoomArend" Multiplicity="0..1" />
+          <End Role="Fond" Type="Self.Fond" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RoomArend">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Fond">
+              <PropertyRef Name="id_RoomArend" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Manager_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
+          <End Role="Manager" Type="Self.Manager" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Manager">
+              <PropertyRef Name="Id_role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="AkropolKaluginEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Aircondit" EntityType="Self.Aircondit" />
+          <EntitySet Name="Bathroom" EntityType="Self.Bathroom" />
+          <EntitySet Name="Fond" EntityType="Self.Fond" />
+          <EntitySet Name="Location" EntityType="Self.Location" />
+          <EntitySet Name="Manager" EntityType="Self.Manager" />
+          <EntitySet Name="Role" EntityType="Self.Role" />
+          <EntitySet Name="RoomArend" EntityType="Self.RoomArend" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <AssociationSet Name="FK_Fond_Aircondit" Association="Self.FK_Fond_Aircondit">
+            <End Role="Aircondit" EntitySet="Aircondit" />
+            <End Role="Fond" EntitySet="Fond" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Fond_Bathroom" Association="Self.FK_Fond_Bathroom">
+            <End Role="Bathroom" EntitySet="Bathroom" />
+            <End Role="Fond" EntitySet="Fond" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Fond_Location" Association="Self.FK_Fond_Location">
+            <End Role="Location" EntitySet="Location" />
+            <End Role="Fond" EntitySet="Fond" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Fond_RoomArend" Association="Self.FK_Fond_RoomArend">
+            <End Role="RoomArend" EntitySet="RoomArend" />
+            <End Role="Fond" EntitySet="Fond" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Manager_Role" Association="Self.FK_Manager_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="Manager" EntitySet="Manager" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище AkropolKaluginModelContainer" CdmEntityContainer="AkropolKaluginEntities">
+          <EntitySetMapping Name="Aircondit">
+            <EntityTypeMapping TypeName="AkropolKaluginModel.Aircondit">
+              <MappingFragment StoreEntitySet="Aircondit">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="aircondit1" ColumnName="aircondit" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Bathroom">
+            <EntityTypeMapping TypeName="AkropolKaluginModel.Bathroom">
+              <MappingFragment StoreEntitySet="Bathroom">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="vid" ColumnName="vid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Fond">
+            <EntityTypeMapping TypeName="AkropolKaluginModel.Fond">
+              <MappingFragment StoreEntitySet="Fond">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="floor" ColumnName="floor" />
+                <ScalarProperty Name="year_build" ColumnName="year_build" />
+                <ScalarProperty Name="quntyti_rooms" ColumnName="quntyti_rooms" />
+                <ScalarProperty Name="price_cadastr" ColumnName="price_cadastr" />
+                <ScalarProperty Name="price_arend" ColumnName="price_arend" />
+                <ScalarProperty Name="price_market" ColumnName="price_market" />
+                <ScalarProperty Name="id_RoomArend" ColumnName="id_RoomArend" />
+                <ScalarProperty Name="id_Bathroom" ColumnName="id_Bathroom" />
+                <ScalarProperty Name="id_Location" ColumnName="id_Location" />
+                <ScalarProperty Name="id_aircondit" ColumnName="id_aircondit" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Location">
+            <EntityTypeMapping TypeName="AkropolKaluginModel.Location">
+              <MappingFragment StoreEntitySet="Location">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="location1" ColumnName="location" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Manager">
+            <EntityTypeMapping TypeName="AkropolKaluginModel.Manager">
+              <MappingFragment StoreEntitySet="Manager">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Id_role" ColumnName="Id_role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Role">
+            <EntityTypeMapping TypeName="AkropolKaluginModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RoomArend">
+            <EntityTypeMapping TypeName="AkropolKaluginModel.RoomArend">
+              <MappingFragment StoreEntitySet="RoomArend">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Arend" ColumnName="Arend" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="AkropolKaluginModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

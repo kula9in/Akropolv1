@@ -1,0 +1,40 @@
+﻿<Window x:Class="Akropol.View.Windows.OnovaWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Akropol.View.Windows"
+        mc:Ignorable="d"
+        Title="OnovaWindow" Height="750" Width="1000" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.4*" />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="0.6*" />
+            <ColumnDefinition Width="0.34*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.2*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="0.12*" />
+        </Grid.RowDefinitions>
+        <Frame Name="Frame11" Grid.ColumnSpan="4" Grid.Column="0" Grid.Row="1"/>
+        <TextBlock Text="Вы вошли как менеджер по продажам" Grid.Column="1" FontSize="18" VerticalAlignment="Center" Grid.ColumnSpan="2"  HorizontalAlignment="Center" FontWeight="Bold"/>
+        <Button Grid.Row="2" Grid.Column="3" Content="Фонды" HorizontalAlignment="Center" FontSize="30" VerticalAlignment="Center" Name="FondBtn" Click="FondBtn_Click">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="15" />
+                </Style>
+            </Button.Resources>
+        </Button>
+        
+        <Button Content="Назад" Grid.Row="2" HorizontalAlignment="Center" FontSize="30" VerticalAlignment="Center" Name="BackBtn" Click="BackBtn_Click">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="15" />
+                </Style>
+            </Button.Resources>
+        </Button>
+    </Grid>
+    
+</Window>
